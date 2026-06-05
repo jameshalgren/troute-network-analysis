@@ -1,6 +1,6 @@
 # troute-network
 
-An independent Python package for NHD channel network traversal, analysis, and parallelized routing preparation. This code was extracted from NOAA's `t-route` application to allow isolated exploration, optimization, and reuse.
+An independent Python package for NHD channel network traversal, analysis, and parallelized routing preparation. This code was extracted using agentic AI (Google AntiGravity) from NOAA's `t-route` application to allow isolated exploration, optimization, and reuse. See project_backlog.md for additional details.
 
 ## Features
 

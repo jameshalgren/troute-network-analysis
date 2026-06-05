@@ -4,7 +4,7 @@
 
 The National Water Model (NWM) models the stream channels in the United States as a directed acyclic graph (DAG) network. The core mapping of this network is defined in the `RouteLink` dataset (e.g., `RouteLink_CONUS.nc`). Within this massive national network, there are approximately 12,000 independent subnetworks. Each subnetwork is a collection of channel segments starting from headwaters and coalescing down to a single shared terminal outlet (such as an ocean outlet or an inland sink).
 
-For diagnostic analysis of NWM outputs, working with the entire CONUS-scale network is computationally heavy and inefficient. The `troute-network-analysis` repository was established to extract the relevant routing objects from the larger `t-route` application, enabling the creation of compact network subsets. 
+While executing t-route with the full network is remarkably efficent, there are a number of reasons to subset the full network for more detailed diagnostic analysis of NWM outputs. The `troute-network-analysis` repository provides tools for exploring subnetworks of the NWM routing network and, in particular, to provide a simple method for preparing mask files which may be used to reduce the size of the routing domain within `t-route` application.
 
 While the initial demo notebook (`Network_Analysis_via_Parallelization_Demo.ipynb`) focuses on parallelization of these independent networks, the repository's primary role moving forward is supporting subnetwork subsetting, diagnostic queries, visualization, and test package generation for `t-route` model runs.
 

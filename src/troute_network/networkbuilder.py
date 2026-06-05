@@ -383,6 +383,34 @@ def get_up_connections(
     )
 
 
+def get_upstream_mask(link_id, connections, terminal_code=-999):
+    """
+    Traverses the upstream network starting from a given link_id and returns
+    a set of all reach IDs in that subnetwork.
+
+    Args:
+        link_id: The starting segment ID (e.g. terminal outlet key or USGS gage link ID).
+        connections: The populated connections dictionary (must have 'upstreams' computed).
+        terminal_code: Value representing the boundary/headwater terminator.
+
+    Returns:
+        A set of unique integer reach IDs in the upstream subnetwork.
+    """
+    upstream_reaches = set()
+    stack = [link_id]
+
+    while stack:
+        curr = stack.pop()
+        if curr in upstream_reaches or curr == terminal_code or curr is None:
+            continue
+        upstream_reaches.add(curr)
+        if curr in connections and "upstreams" in connections[curr]:
+            # Add upstreams to stack
+            stack.extend(connections[curr]["upstreams"])
+
+    return upstream_reaches
+
+
 def main():
     """##TEST"""
     print("")

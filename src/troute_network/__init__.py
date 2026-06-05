@@ -3,6 +3,7 @@ from .networkbuilder import (
     get_waterbody_segments,
     determine_keys,
     get_up_connections,
+    get_upstream_mask,
 )
 from .nhd_network_utilities import (
     get_geo_file_table_rows,

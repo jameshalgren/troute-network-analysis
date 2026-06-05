@@ -48,4 +48,6 @@ To run the notebook:
 3. Open `notebooks/Network_Analysis_via_Parallelization_Demo.ipynb`.
 4. Run the cells. It will load data from `test_data/Channels/NHD_BrazosLowerColorado_Channels.shp`.
 
-*Note: For the full CONUS networks (such as `CONUS_ge5` or `CONUS_FULL_RES_v20`), you must supply the large ~269 MB RouteLink NetCDF file (`RouteLink_CONUS.nwm.v3.0.20.nc`). This file is omitted from this repository due to size.*
+*Note: For the full CONUS networks (such as `CONUS_ge5` or `CONUS_FULL_RES_v20`), you must supply the large ~269 MB RouteLink NetCDF file (`RouteLink_CONUS.nwm.v3.0.20.nc`). This file is omitted from this repository due to size but may be obtained from the NWS/NCO parameter download site here: https://www.nco.ncep.noaa.gov/pmb/codes/nwprod/
+Note that the link will occasionally update as the model versions are incremented; the current file is found at this link: https://www.nco.ncep.noaa.gov/pmb/codes/nwprod/nwm.v3.0.20/parm/domain/RouteLink_CONUS.nc
+Note also the slight name change in the file as expected for the notebook and scripts in this package.*

@@ -581,3 +581,46 @@ def set_networks(supernetwork="", geo_input_folder=None, verbose=True, debugleve
         supernetwork_data=supernetwork_data, verbose=verbose, debuglevel=debuglevel
     )
     return supernetwork_data, supernetwork_values
+
+
+def build_gage_link_mapping(route_link_nc_path, output_csv_path):
+    """
+    Reads the RouteLink NetCDF file and extracts all valid USGS Gage IDs
+    and their corresponding link IDs, writing them to a CSV mapping file.
+
+    Args:
+        route_link_nc_path: Path to the RouteLink_CONUS.nc NetCDF file.
+        output_csv_path: Path to save the output CSV mapping file.
+    """
+    import xarray as xr
+    import pandas as pd
+    import numpy as np
+
+    print(f"Reading RouteLink file: {route_link_nc_path}")
+    with xr.open_dataset(route_link_nc_path) as ds:
+        # Extract variables as numpy arrays
+        link_ids = ds['linkid'].values
+        gages = ds['gage'].values
+
+    # Handle possible byte-arrays or multi-dimensional char arrays in gage variable
+    cleaned_gages = []
+    for g in gages:
+        if isinstance(g, bytes):
+            cleaned_gages.append(g.decode('utf-8').strip())
+        elif isinstance(g, np.ndarray):
+            cleaned_gages.append("".join([c.decode('utf-8') if isinstance(c, bytes) else str(c) for c in g]).strip())
+        else:
+            cleaned_gages.append(str(g).strip())
+
+    df = pd.DataFrame({
+        'gage_id': cleaned_gages,
+        'link_id': link_ids
+    })
+
+    # Filter out invalid gage mappings
+    invalid_codes = {'', 'nan', '-9999', 'None', 'null'}
+    df = df[~df['gage_id'].isin(invalid_codes)]
+
+    df.to_csv(output_csv_path, index=False)
+    print(f"USGS Gage mapping database ({len(df)} records) successfully written to {output_csv_path}")
+

@@ -12,6 +12,7 @@ from .nhd_network_utilities import (
     get_nhd_connections,
     set_supernetwork_data,
     set_networks,
+    build_gage_link_mapping,
 )
 from .recursive_print import (
     print_basic_network_info,
